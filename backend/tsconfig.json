@@ -9,9 +9,9 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "types": ["node", "jest"]  // 👈 add this
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
 }
-
