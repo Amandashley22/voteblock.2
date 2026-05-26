@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(open:*)",
+      "Bash(npx playwright:*)",
+      "Bash(node -e:*)",
+      "Bash(python3:*)",
+      "Bash(/Users/apple/.venv/bin/python3:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run seed:admin:*)",
+      "Bash(npm run dev:*)"
+    ]
+  }
+}
