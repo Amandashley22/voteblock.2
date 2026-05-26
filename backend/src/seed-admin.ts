@@ -6,11 +6,10 @@ const ADMIN_USERNAME = "admin";
 const ADMIN_EMAIL = "admin@voteblock.com";
 const ADMIN_PASSWORD = "admin123!";
 
-async function seedAdmin() {
+export async function seedAdmin() {
   const existing: any = db.prepare("SELECT id FROM users WHERE username = ?").get(ADMIN_USERNAME);
 
   if (existing) {
-    // Update existing user to admin role
     db.prepare("UPDATE users SET role = 'admin' WHERE id = ?").run(existing.id);
     console.log(`User "${ADMIN_USERNAME}" already exists — updated role to admin.`);
   } else {
@@ -29,7 +28,9 @@ async function seedAdmin() {
   }
 
   console.log("Done.");
-  process.exit(0);
 }
 
-seedAdmin();
+// Only run directly if called as a script
+if (require.main === module) {
+  seedAdmin().then(() => process.exit(0));
+}

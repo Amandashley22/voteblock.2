@@ -6,6 +6,7 @@ import crypto from "crypto";
 import "./lib/db";
 import { config } from "./lib/config";
 import db from "./lib/db";
+import { seedAdmin } from "./seed-admin";
 import authRoutes from "./routes/auth";
 import pollRoutes from "./routes/polls";
 import voteRoutes from "./routes/votes";
@@ -66,11 +67,11 @@ app.get("/api/health", (req, res) => {
 app.post("/api/init", async (req, res, next) => {
   try {
     const adminExists = db.prepare("SELECT id FROM users WHERE role = 'admin'").get();
-    
+
     if (adminExists) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         message: "Admin user already exists",
-        credentials: null 
+        credentials: null
       });
     }
 
@@ -86,7 +87,7 @@ app.post("/api/init", async (req, res, next) => {
       "INSERT INTO users (id, username, email, password, role, created_at) VALUES (?, ?, ?, ?, ?, ?)"
     ).run(id, ADMIN_USERNAME, ADMIN_EMAIL, hashedPassword, "admin", createdAt);
 
-    res.json({ 
+    res.json({
       message: "Admin user created successfully",
       credentials: {
         username: ADMIN_USERNAME,
@@ -102,7 +103,13 @@ app.post("/api/init", async (req, res, next) => {
 // Error handling middleware (must come after all routes)
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-  console.log(`Environment: ${config.NODE_ENV}`);
-});
+// Start server and seed admin
+async function start() {
+  await seedAdmin();
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Environment: ${config.NODE_ENV}`);
+  });
+}
+
+start();
