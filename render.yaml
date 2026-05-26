@@ -16,7 +16,7 @@ services:
         value: https://voteblock-frontend.onrender.com
     healthCheckPath: /api/health
 
-  - type: static_site
+  - type: static
     name: voteblock-frontend
     buildCommand: cd frontend && npm install && npm run build
     publishDir: frontend/dist
