@@ -1,5 +1,5 @@
 services:
-  - type: web_service
+  - type: web
     name: voteblock-backend
     runtime: node
     plan: free
@@ -19,7 +19,7 @@ services:
   - type: static_site
     name: voteblock-frontend
     buildCommand: cd frontend && npm install && npm run build
-    publishPath: frontend/dist
+    publishDir: frontend/dist
     envVars:
       - key: VITE_API_URL
         value: https://voteblock-backend.onrender.com/api
