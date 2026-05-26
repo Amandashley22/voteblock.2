@@ -49,7 +49,6 @@ export function AdminDashboard() {
   const maxDailyVotes = stats ? Math.max(...stats.dailyVotes.map(d => d.count), 1) : 1;
   const totalDistribution = stats ? stats.pollStatusDistribution.open + stats.pollStatusDistribution.closed : 1;
   const openPct = stats && totalDistribution > 0 ? (stats.pollStatusDistribution.open / totalDistribution) * 100 : 0;
-  const closedPct = stats && totalDistribution > 0 ? (stats.pollStatusDistribution.closed / totalDistribution) * 100 : 0;
 
   return (
     <div style={styles.container}>
