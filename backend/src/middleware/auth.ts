@@ -3,7 +3,11 @@ import jwt from "jsonwebtoken";
 import { config } from "../lib/config";
 import { AppError } from "./errorHandler";
 
-export interface AuthRequest extends Request<any, any, any, any> {
+export interface AuthRequest {
+  headers: any;
+  params: any;
+  body: any;
+  query: any;
   user?: {
     userId: string;
     username: string;
