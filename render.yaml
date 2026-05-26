@@ -3,7 +3,7 @@ services:
     name: voteblock-backend
     runtime: node
     plan: free
-    buildCommand: cd backend && npm install && npm run build
+    buildCommand: cd backend && npm install --include=dev && npm run build
     startCommand: cd backend && npm start
     envVars:
       - key: NODE_ENV
@@ -15,12 +15,4 @@ services:
       - key: CORS_ORIGIN
         value: https://voteblock-frontend.onrender.com
     healthCheckPath: /api/health
-
-  - type: web
-    name: voteblock-frontend
-    runtime: static
-    buildCommand: cd frontend && npm install && npm run build
-    staticPublishPath: ./frontend/dist
-    envVars:
-      - key: VITE_API_URL
-        value: https://voteblock-backend.onrender.com/api
+  ...
