@@ -1,5 +1,5 @@
 services:
-  - type: web
+  - type: web_service
     name: voteblock-backend
     runtime: node
     plan: free
@@ -16,9 +16,8 @@ services:
         value: https://voteblock-frontend.onrender.com
     healthCheckPath: /api/health
 
-  - type: web
+  - type: static_site
     name: voteblock-frontend
-    runtime: static
     buildCommand: cd frontend && npm install && npm run build
     publishPath: frontend/dist
     envVars:
